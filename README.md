@@ -2,9 +2,8 @@ To deploy this API on local server run this command on your IDE terminal.
 
 uvicorn main:app --reload
 
-Prerequisites For Running this code in your local, 
-
-if not sure then go to your cmd and type {pip install "the content below without curly braces"} and run these one by one:
+-------------------------------------------------------------------------------------------------------------------------
+Prerequisites For Running this code in your local ->
 
 {fastapi[all]}
 
@@ -23,3 +22,6 @@ if not sure then go to your cmd and type {pip install "the content below without
 {tiktoken}
 
 {docx2txt}
+
+
+If not sure then go to your cmd and type {pip install "the content above without curly braces"} and run these one by one:
