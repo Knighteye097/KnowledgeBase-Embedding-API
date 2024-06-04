@@ -1,5 +1,6 @@
 import os
-from fastapi import FastAPI, UploadFile, File
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from langchain_community.document_loaders import Docx2txtLoader
 from langchain_community.vectorstores import FAISS
@@ -13,6 +14,18 @@ load_dotenv()
 
 # Define a FastAPI app
 app = FastAPI()
+
+# CORS configuration to allow requests from Workbench frontend
+origins = [
+    "http://localhost:4200"
+]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Load documents and create embeddings
 file_paths = ["Hackathon Spec Cleanup Data.docx", "PowerIndex Data.docx", "Software Options Data.docx", "Spec Performance Data.docx"]
