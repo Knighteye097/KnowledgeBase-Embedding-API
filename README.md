@@ -1,3 +1,9 @@
+To start a local development server serving requests on http://127.0.0.1:8000 by default, run the following command in IDE terminal:
+
+fastapi dev main.py
+
+-------------------------------------------------------------------------------------------------------------------------
+
 To deploy this API on local server run this command on your IDE terminal.
 
 uvicorn main:app --reload
