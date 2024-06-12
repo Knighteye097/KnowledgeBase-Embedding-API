@@ -35,16 +35,17 @@ for file_path in file_paths:
         loader = Docx2txtLoader(file_path=file_path)
         documents.extend(loader.load())
 
-embeddings = OpenAIEmbeddings()
+embeddings = OpenAIEmbeddings(openai_api_key="")
 db = FAISS.from_documents(documents, embeddings)
 
 # Setup LLMChain & prompts
-llm = ChatOpenAI(temperature=0, model="gpt-4o")
+llm = ChatOpenAI(temperature=0, model="gpt-4o", openai_api_key="")
 template = """
 Your name is CPQ BotSensei.
 You are a world-class business development representative of our CPQ Application.
 
 I will share a prospect's message with you, and you will provide the most accurate response based on your knowledge of our business specifications.
+Please remove any formatting from your answer right before sending it.
 
 Below is a message I received from the prospect:
 {message}
