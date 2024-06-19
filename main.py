@@ -28,24 +28,24 @@ app.add_middleware(
 )
 
 # Load documents and create embeddings
-file_paths = ["Hackathon Spec Cleanup Data.docx", "PowerIndex Data.docx", "Software Options Data.docx", "Spec Performance Data.docx"]
+file_paths = ["Hackathon Spec Cleanup Data.docx", "PowerIndex Data.docx", "Software Options Data.docx", "Spec Performance Data.docx",
+              "Flow of creating model and best practices.docx", "Ticket-System.docx"]
 documents = []
 for file_path in file_paths:
     if os.path.exists(file_path) and os.path.getsize(file_path) > 0:
         loader = Docx2txtLoader(file_path=file_path)
         documents.extend(loader.load())
 
-embeddings = OpenAIEmbeddings(openai_api_key="")
+embeddings = OpenAIEmbeddings()
 db = FAISS.from_documents(documents, embeddings)
 
 # Setup LLMChain & prompts
-llm = ChatOpenAI(temperature=0, model="gpt-4o", openai_api_key="")
+llm = ChatOpenAI(temperature=0, model="gpt-4o")
 template = """
-Your name is CPQ BotSensei.
-You are a world-class business development representative of our CPQ Application.
+Your name is Workbench Bot.
+You are a world-class business development representative of our Workbench Application.
 
 I will share a prospect's message with you, and you will provide the most accurate response based on your knowledge of our business specifications.
-Please remove any formatting from your answer right before sending it.
 
 Below is a message I received from the prospect:
 {message}
@@ -55,7 +55,8 @@ Here is a list of content realted to this query that we have found in our specif
 
 Please write the most accurate response based on our business specifications:
 
-Please ensure that your response is accurate and aligned with our business specifications..
+Please ensure that your response is accurate and aligned with our business specifications.
+Don't use any markdown formating in your answer!
 """
 prompt = PromptTemplate(input_variables=["message", "best_practice"], template=template)
 chain = LLMChain(llm=llm, prompt=prompt)
