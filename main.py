@@ -56,7 +56,7 @@ Here is a list of content realted to this query that we have found in our specif
 Please write the most accurate response based on our business specifications:
 
 Please ensure that your response is accurate and aligned with our business specifications.
-Don't use any markdown formating in your answer!
+Please remove any formatting, bullet points from the response and format the number list as a separate line for each point in the response!
 """
 prompt = PromptTemplate(input_variables=["message", "best_practice"], template=template)
 chain = LLMChain(llm=llm, prompt=prompt)
